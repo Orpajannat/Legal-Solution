@@ -2,91 +2,75 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image'
 
-const faqData = [
-   {
-      question: "1. Are application fee waivers available?",
-      answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour."
-   },
-   {
-      question: "2. Are application fee waivers available?",
-      answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour."
-   },
-   {
-      question: "2. Are application fee waivers available?",
-      answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour."
-   },
-   {
-      question: "2. Are application fee waivers available?",
-      answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour."
-   }
-];
 
 export default function FrequentlyAskedQuestion () {
-  const [openIndex, setOpenIndex] = useState(0);
-  const contentRefs = useRef([]);
-  
+    const [openIndex, setOpenIndex] = React.useState(-1);
+
+    const faqs = [
+        {
+            question: "1. Are application fee waivers available?",
+            answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, ."
+        },
+        {
+            question: "2. Are application fee waivers available?",
+            answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, ."
+        },
+        {
+            question: "3. Are application fee waivers available?",
+            answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, ."
+        },
+        {
+            question: "4. Are application fee waivers available?",
+            answer: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, ."
+        }
+    ];
+   const toggleFAQ = (index) => {
+        setOpenIndex(openIndex === index ? -1 : index);
+    };
   return (
     <div className="py-30">
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center text-center">
         <h3 className='text-5xl font-bold py-5'>Frequently Asked Any Questions</h3>
         <p className='text-sm text-gray-400 pb-20'>
             There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.
         </p>
-        <div className='flex flex-row'>
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-taupe-100 gap-5">
-              {faqData.map((item, index) => {
-                const isOpen = openIndex === index;
+        <div className='flex flex-col md:flex-col lg:flex-row items-center gap-10 container mx-auto'>
 
-                  return (
-                    <div key={index} className="py-6">
-                          <h3 id={`faq-heading-${index}`}>
-                            <button
-                              type="button"
-                              aria-expanded={isOpen}
-                              aria-controls={`faq-panel-${index}`}
-                              onClick={() => setOpenIndex(isOpen ? null : index)}
-                              className="toggle-button cursor-pointer w-full text-base outline-none font-semibold text-slate-900 flex items-center focus-visible:ring-2 focus-visible:ring-blue-500 rounded dark:text-slate-50"
-                            >
-                              <span className="mr-4 text-left">{item.question}</span>
-                              <svg
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 512 512"
-                                 className="size-3.5 fill-current ml-auto shrink-0 transition-transform duration-300"
-                                 aria-hidden="true"
-                              >ss
-                                 <path d="M40.421 215.579H471.579C493.868 215.579 512 233.711 512 256s-18.132 40.421-40.421 40.421H40.421C18.132 296.421 0 278.289 0 256s18.132-40.421 40.421-40.421z" />
-                                 <path
-                                    className={`transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
-                                    d="M215.579 40.421C215.579 18.132 233.711 0 256 0s40.421 18.132 40.421 40.421v431.158C296.421 493.868 278.289 512 256 512s-40.421-18.132-40.421-40.421V40.421z"
-                                 />
-                              </svg>
-                            </button>
-                          </h3>
+          <div className="flex items-center justify-center py-12 gap-10">
+            <div className="w-full max-w-3xl">
+              <div className="space-y-8">
+                {faqs.map((faq, index) => (
+                    <div key={index}>
+                      <div className={`bg-gray-200 overflow-hidden transition-all duration-200 ease-in-out ${openIndex === index ? 'rounded-t-lg' : 'rounded-lg'}`}>
+                        <button onClick={() => toggleFAQ(index)} className="w-full flex items-center justify-between p-4 text-left">
+                            <span className="text-lg font-bold text-zinc-800 pr-4">{faq.question}</span>
+                              <span className="shrink-0">
+                                {openIndex === index ? (
+                                  <div className='size-4 flex items-center justify-center cursor-pointer'>
+                                    <svg className='block group-open:hidden' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /></svg>
+                                  </div>
+                                        ) : (
+                                  <div className='size-4 flex items-center justify-center cursor-pointer'>
+                                    <svg className='block group-open:hidden' xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                                  </div>
+                                            )}
+                              </span>
+                        </button>
+                      </div>
 
-                          <div
-                           id={`faq-panel-${index}`}
-                           role="region"
-                           aria-labelledby={`faq-heading-${index}`}
-                           aria-hidden={!isOpen}
-                           ref={(el) => (contentRefs.current[index] = el)}
-                           style={{
-                              maxHeight: isOpen ? `${contentRefs?.current[index]?.scrollHeight}px` : '0px',
-                           }}
-                           className={`content overflow-hidden transition-all duration-300 ease-in-out ${!isOpen ? 'invisible' : ''}`}
-                          >
-                            <div className="mt-4">
-                              <p className="text-base text-slate-600 leading-relaxed dark:text-slate-400">
-                                 {item.answer}
-                              </p>
-                            </div>
-                          </div>
+                      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                        <div className="bg-gray-200 px-4 py-2 rounded-b-lg">
+                          <p className="text-sm font-light text-zinc-600 leading-relaxed">
+                            {faq.answer}
+                          </p>
                         </div>
-                      );
-                    })}
+                      </div>
+                    </div>
+                ))}
+              </div>
             </div>
           </div>
-          <Image src="/images/faq.png" alt="faq" width={350} height={300}/>
+          <Image src="/images/faq.png" alt="faq" width={600} height={300} className='h-fit w-fit'/>
         </div>
       </div>
     </div>
