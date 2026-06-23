@@ -19,7 +19,15 @@ export const settingsApi = baseApi.injectEndpoints({
                 body: subscribeData,
             }),
         }),
+
+        freeConsultation: builder.mutation({
+            query: (Data) => ({
+                url: "/consultations",
+                method: "POST",
+                body: Data,
+            }),
+        }),
     }),
 });
 
-export const { useGetSettingsQuery, useSendSubscribeMutation } = settingsApi;
+export const { useGetSettingsQuery, useSendSubscribeMutation, useFreeConsultationMutation } = settingsApi;

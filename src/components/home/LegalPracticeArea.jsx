@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useGetServicesQuery } from '@/redux/features/services/servicesApi';
+import { useGetServicesQuery, useGetServiceBySlugQuery  } from '@/redux/features/services/servicesApi';
 import { useGetSettingsQuery } from '@/redux/features/settings/settingsApi';
 import { getImageUrl } from "@/lib/image";
 
@@ -14,7 +14,7 @@ export default function LegalPracticeArea () {
 
     const service = rawServices.map(item => ({
         ...item,
-        icon: getImageUrl(item.icon),
+        icon: getImageUrl(item.icon)
     }));
     // const[practice, setPractice] = useState(null);
     // const [loading, setLoading] = useState(true);
