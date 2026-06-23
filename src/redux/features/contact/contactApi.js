@@ -10,7 +10,16 @@ export const contactApi = baseApi.injectEndpoints({
             providesTags: ["Contact"],
             transformResponse: (response) => response?.data || [],
         }),
+
+        sendMessage: builder.mutation({
+            query: (formData) => ({
+                url: "/messages",
+                method: "POST",
+                body: formData,  
+            }),
+        }),
+
     }),
 });
 
-export const { useGetContactQuery } = contactApi;
+export const { useGetContactQuery, useSendMessageMutation } = contactApi;

@@ -1,11 +1,12 @@
 "use client"
 import Image from 'next/image'
 import React, { useState } from 'react'
-import { useGetSettingsQuery } from '@/redux/features/settings/settingsApi';
+import { useGetSettingsQuery, useSendSubscribeMutation  } from '@/redux/features/settings/settingsApi';
 
 export default function Footer () {
   const{data: footer, isLoading: footerLoading}= useGetSettingsQuery();
   const{data: subscribe=[], isLoading: settingsLoading}= useGetSettingsQuery();
+  const [sendSubscribe, { isLoading: sending }] = useSendSubscribeMutation();
   // const[subscribe, setSubscribe]= useState(null)
   // const[footer, setFooter]= useState(null)
   // const [loading, setLoading] = useState(true);
@@ -27,13 +28,8 @@ export default function Footer () {
   if (loading) return <p className="text-center py-20 text-gray-400">Loading...</p>;
 
   const handleSubmit = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscribers`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(subscribeData),
-        });
-        const json = await res.json();
-        setStatus(json.success ? 'Subscription saved successfully.' : 'Something went wrong.');
+        const res = await sendSubscribe();
+        setStatus(res.data?.success ? 'Subscription saved successfully.' : 'Something went wrong.');
     };
   return (
     <div className='bg-black py-30'>

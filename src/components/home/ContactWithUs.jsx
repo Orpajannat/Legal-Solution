@@ -1,7 +1,7 @@
 "use client"
 import React, { useState} from 'react'
 import Image from 'next/image'
-import { useGetContactQuery } from '@/redux/features/contact/contactApi';
+import { useGetContactQuery, useSendMessageMutation } from '@/redux/features/contact/contactApi';
 import { useGetSettingsQuery } from '@/redux/features/settings/settingsApi';
 
 export default function ContactWithUs () {
@@ -10,6 +10,7 @@ export default function ContactWithUs () {
     // const [loading, setLoading] = useState(true);
     const {data: contact, isLoading: contactLoading }= useGetContactQuery();
     const {data: contactIntro, isLoading: settingsLoading }= useGetSettingsQuery();
+    const [sendMessage, { isLoading: sending }] = useSendMessageMutation();
 
     const loading = contactLoading || settingsLoading;
 
@@ -31,13 +32,8 @@ export default function ContactWithUs () {
 
 
     const handleSubmit = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/messages`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-        });
-        const json = await res.json();
-        setStatus(json.success ? 'Message submitted successfully.' : 'Something went wrong.');
+        const res = await sendMessage(formData);
+        setStatus(res.data?.success ? 'Message submitted successfully.' : 'Something went wrong.');
     };
     
   return (

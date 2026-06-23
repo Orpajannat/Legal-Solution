@@ -10,7 +10,16 @@ export const settingsApi = baseApi.injectEndpoints({
             providesTags: ["Settings"],
             transformResponse: (response) => response?.data || null,
         }),
+
+
+        sendSubscribe: builder.mutation({
+            query: (subscribeData) => ({
+                url: "/settings",
+                method: "POST",
+                body: subscribeData,
+            }),
+        }),
     }),
 });
 
-export const { useGetSettingsQuery } = settingsApi;
+export const { useGetSettingsQuery, useSendSubscribeMutation } = settingsApi;
