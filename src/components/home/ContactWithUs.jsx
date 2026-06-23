@@ -29,7 +29,9 @@ export default function ContactWithUs () {
 //   });
 // }, []);
 
+
     if (loading) return <p className="text-center py-20 text-gray-400">Loading...</p>;
+
 
     const validate = () => {
         const newErrors = {};
@@ -105,29 +107,33 @@ export default function ContactWithUs () {
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})} 
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'/>
-                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.name}</p>}
                     </div>
+                    {errors.message && <p className="text-red-400 text-xs">{errors.name}</p>}
+
                     <div className="bg-taupe-100 rounded-lg  min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4">
                         <input type='text' placeholder='Your Email'
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})} 
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'/>
-                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.email}</p>}
                     </div>
+                    {errors.message && <p className="text-red-400 text-xs">{errors.email}</p>}
+
                     <div className="bg-taupe-100 rounded-lg  min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4">
                         <input type='text' placeholder='Subject'
                         value={formData.subject}
                         onChange={(e) => setFormData({...formData, subject: e.target.value})}
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'/>
-                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.subject}</p>}
                     </div>
+                    {errors.message && <p className="text-red-400 text-xs">{errors.subject}</p>}
+
+
                     <div className="bg-taupe-100 rounded-lg  min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4">
                         <textarea placeholder='Your Message'
                         value={formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'></textarea>
-                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.message}</p>}
                     </div>
+                    {errors.message && <p className="text-red-400 text-xs">{errors.message}</p>}
 
                     <p>{status}</p>
                     <button onClick={handleSubmit} disabled={sending} className="bg-taupe-500 hover:bg-taupe-600 rounded-lg min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4 text-white font-bold">
