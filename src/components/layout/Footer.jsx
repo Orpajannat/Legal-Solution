@@ -68,7 +68,7 @@ export default function Footer () {
           <h3 className='font-bold text-xl text-white pb-10'>{subscribe.subscribe_title}</h3>
           <div className="flex flex-col text-taupe-300 md:text-sm text-xs">
             <p>{subscribe.subscribe_description}</p>
-            <div flex flex-col justify-center>
+            <div className= "flex flex-col justify-center">
               <div className='flex flex-row pt-5'>
                 <input type="text" placeholder='username@site.com'
                   value={subscribeData.email}

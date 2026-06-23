@@ -11,6 +11,8 @@ export default function HeroBanner () {
         ...settings,
         hero_background_image: getImageUrl(settings.hero_background_image)
     } : null;
+
+    console.log(heroBanner)
     // const [heroBanner, setHeroBanner] = useState([]);
     //   const [loading, setLoading] = useState(true);
     
