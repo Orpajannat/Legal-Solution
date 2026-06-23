@@ -14,7 +14,7 @@ export const settingsApi = baseApi.injectEndpoints({
 
         sendSubscribe: builder.mutation({
             query: (subscribeData) => ({
-                url: "/settings",
+                url: "/subscribers",
                 method: "POST",
                 body: subscribeData,
             }),

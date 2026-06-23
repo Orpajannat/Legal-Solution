@@ -15,6 +15,7 @@ export default function ContactWithUs () {
     const loading = contactLoading || settingsLoading;
 
     const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+    const [errors, setErrors] = useState({});
     const [status, setStatus] = useState('');
 
 //     useEffect(() => {
@@ -30,8 +31,32 @@ export default function ContactWithUs () {
 
     if (loading) return <p className="text-center py-20 text-gray-400">Loading...</p>;
 
+    const validate = () => {
+        const newErrors = {};
+
+        if (!formData.name.trim()) 
+            newErrors.name = 'Name is required';
+
+        if (!formData.email.trim()) 
+            newErrors.email = 'Email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) 
+            newErrors.email = 'Enter a valid email';
+
+        if (!formData.subject.trim()) 
+            newErrors.subject = 'Subject is required';
+
+        if (!formData.message.trim()) 
+            newErrors.message = 'Message is required';
+
+        console.log(newErrors);
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
 
     const handleSubmit = async () => {
+         if (!validate()) return;
+         
         const res = await sendMessage(formData);
         setStatus(res.data?.success ? 'Message submitted successfully.' : 'Something went wrong.');
     };
@@ -80,29 +105,33 @@ export default function ContactWithUs () {
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})} 
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'/>
+                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.name}</p>}
                     </div>
                     <div className="bg-taupe-100 rounded-lg  min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4">
                         <input type='text' placeholder='Your Email'
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})} 
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'/>
+                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.email}</p>}
                     </div>
                     <div className="bg-taupe-100 rounded-lg  min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4">
                         <input type='text' placeholder='Subject'
                         value={formData.subject}
                         onChange={(e) => setFormData({...formData, subject: e.target.value})}
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'/>
+                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.subject}</p>}
                     </div>
                     <div className="bg-taupe-100 rounded-lg  min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4">
                         <textarea placeholder='Your Message'
                         value={formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
                         className='pl-4 w-full border-none outline-none shadow-none bg-transparent text-gray-500'></textarea>
+                        {errors.message && <p className="text-red-400 text-xs pl-4">{errors.message}</p>}
                     </div>
 
                     <p>{status}</p>
-                    <button onClick={handleSubmit} className="bg-taupe-500 hover:bg-taupe-600 rounded-lg min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4 text-white font-bold">
-                        {contactIntro.contact_button_text}
+                    <button onClick={handleSubmit} disabled={sending} className="bg-taupe-500 hover:bg-taupe-600 rounded-lg min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4 text-white font-bold">
+                        {sending ? 'Sending...' : contactIntro.contact_button_text}
                     </button>
                 </div>
             </div>

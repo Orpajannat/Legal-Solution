@@ -13,6 +13,7 @@ export default function Footer () {
   const loading = footerLoading || settingsLoading;
 
   const[subscribeData, setSubscribeData]= useState({email:''});
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('');
 
   // useEffect(()=>{
@@ -27,8 +28,22 @@ export default function Footer () {
 
   if (loading) return <p className="text-center py-20 text-gray-400">Loading...</p>;
 
+      const validate = () => {
+        const newErrors = {};
+
+        if (!subscribeData.email.trim())
+           newErrors.email = 'Email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(subscribeData.email))
+           newErrors.email = 'Enter a valid email';
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+      };
+
   const handleSubmit = async () => {
-        const res = await sendSubscribe();
+      if (!validate()) return; 
+
+        const res = await sendSubscribe(subscribeData);
         setStatus(res.data?.success ? 'Subscription saved successfully.' : 'Something went wrong.');
     };
   return (
@@ -70,8 +85,9 @@ export default function Footer () {
                   value={subscribeData.email}
                   onChange={(e)=>setSubscribeData({...subscribeData, email: e.target.value})}
                   className='bg-white md:p-3 p-2 outline-none rounded-l-lg md:text-sm text-xs'/>
-                  <button onClick={handleSubmit} className='bg-taupe-400 md:p-3 p-2 rounded-r-lg text-white font-semibold md:text-sm text-xs'>{subscribe.subscribe_button_text}</button>
+                  <button onClick={handleSubmit} disabled={sending} className='bg-taupe-400 md:p-3 p-2 rounded-r-lg text-white font-semibold md:text-sm text-xs'>{sending ? 'Sending...' :subscribe.subscribe_button_text}</button>
               </div>
+              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
               <p>{status}</p>
             </div>
           </div>
