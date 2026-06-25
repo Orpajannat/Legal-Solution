@@ -3,28 +3,28 @@ import React from 'react'
 
 export default function BusinessServices () {
   return (
-    <div className="flex flex-row items-center justify-around p-10">
+    <div className="flex flex-col md:flex-col lg:flex-row items-center justify-around px-10 md:py-10 py-0 md:gap-0 gap-5">
         <div className="flex flex-col justify-center gap-5">
             <h1 className="font-bold text-blue-700">BUSINESS SERVICES</h1>
-            <h2 className="text-3xl font-bold text-taupe-700">Create a trusted foundation to ensure future<br/> success</h2>
-            <p className="text-base text-taupe-700 py-5">
+            <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-taupe-700">Create a trusted foundation to ensure future<br/> success</h2>
+            <p className="text-xs md:text-sm lg:text-base text-taupe-700 py-5">
                 FindLaw has partnered with LegalZoom to offer business solutions for busy<br/> entrepreneurs. Get step-by-step help with business formation, registered agent<br/> services, and ongoing compliance.
             </p>
-            <div className="flex flex-row gap-5">
-                <button className="font-bold text-blue-700 px-4 py-3 border rounded-lg hover:bg-blue-700 hover:text-white">
+            <div className="grid grid-cols-2 md:grid md:grid-cols-2 lg:flex lg:flex-row gap-5">
+                <button className="font-bold text-blue-700 md:px-4 px-3 md:py-3 py-2 border rounded-lg hover:bg-blue-700 hover:text-white">
                     LLC
                 </button>
-                <button className="font-bold text-blue-700 px-4 py-3 border rounded-lg hover:bg-blue-700 hover:text-white">
+                <button className="font-bold text-blue-700 md:text-base text-sm md:px-4 px-3 md:py-3 py-2  border rounded-lg hover:bg-blue-700 hover:text-white">
                     Corporation
                 </button>
-                <button className="font-bold text-blue-700 px-4 py-3 border rounded-lg hover:bg-blue-700 hover:text-white">
+                <button className="font-bold text-blue-700 md:text-base text-sm md:px-4 px-3 md:py-3 py-2  border rounded-lg hover:bg-blue-700 hover:text-white">
                     Nonprofit
                 </button>
-                <button className="font-bold text-blue-700 px-4 py-3 border rounded-lg hover:bg-blue-700 hover:text-white">
+                <button className="font-bold text-blue-700 md:text-base text-sm md:px-4 px-3 md:py-3 py-2  border rounded-lg hover:bg-blue-700 hover:text-white">
                     DBA
                 </button>
             </div>
-            <button className="font-bold text-white px-4 py-3 bg-taupe-700 rounded-lg w-fit">
+            <button className="font-bold text-white md:text-base text-sm md:px-4 px-3 md:py-3 py-2  bg-taupe-700 rounded-lg w-fit">
                 Start my business
             </button>
         </div>

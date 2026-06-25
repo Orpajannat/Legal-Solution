@@ -142,7 +142,7 @@ export default function ContactWithUs () {
                     </div>
 
                     <p>{status}</p>
-                    <button onClick={handleSubmit} disabled={sending} className="bg-taupe-500 hover:bg-taupe-600 rounded-lg min-w-2 md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4 text-white font-bold">
+                    <button onClick={handleSubmit} disabled={sending} className="bg-taupe-500 hover:bg-taupe-600 rounded-lg w-fit md:min-w-2 lg:min-w-3xl py-1 md:py-1 lg:py-4 md:px-0 px-2 text-white font-bold">
                         {sending ? 'Sending...' : contactIntro.contact_button_text}
                     </button>
                 </div>

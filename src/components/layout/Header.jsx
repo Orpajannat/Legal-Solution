@@ -45,7 +45,7 @@ export default function Header () {
                     {menuOpen && (
                         <div className="absolute left-6 top-10 z-20 flex flex-col bg-gray-300/60 shadow-lg rounded-lg mt-2 p-2">
                             <Link href="/" className="px-3 py-2 rounded hover:bg-gray-200 text-sm">Home</Link>
-                            <Link href="/services" className="px-3 py-2 rounded hover:bg-gray-200 text-sm">Services</Link>
+                            <Link href="/servicesPage" className="px-3 py-2 rounded hover:bg-gray-200 text-sm">Services</Link>
                             <Link href="/cases" className="px-3 py-2 rounded hover:bg-gray-200 text-sm">Cases</Link>
                             <Link href="/blog" className="px-3 py-2 rounded hover:bg-gray-200 text-sm">Blog</Link>
                             <Link href="/contactUs" className="px-3 py-2 rounded hover:bg-gray-200 text-sm">Contact Us</Link>
